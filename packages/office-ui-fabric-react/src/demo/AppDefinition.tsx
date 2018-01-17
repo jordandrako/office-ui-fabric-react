@@ -161,6 +161,12 @@ export const AppDefinition: IAppDefinition = {
           url: '#/examples/modal'
         },
         {
+          component: require<any>('../components/Ninja/NinjaPage').NinjaPage,
+          key: 'Ninja',
+          name: 'Ninja 🐱‍👤',
+          url: '#/examples/ninja'
+        },
+        {
           component: require<any>('../components/Overlay/OverlayPage').OverlayPage,
           key: 'Overlay',
           name: 'Overlay',
