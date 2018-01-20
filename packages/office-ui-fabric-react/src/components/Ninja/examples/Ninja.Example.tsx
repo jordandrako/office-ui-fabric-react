@@ -11,7 +11,7 @@ export class NinjaExample extends React.Component<{}, {}> {
           'katana',
           'laptop'
         ] }
-        name="kitty"
-      />)
+        name='kitty'
+      />);
   }
 }
