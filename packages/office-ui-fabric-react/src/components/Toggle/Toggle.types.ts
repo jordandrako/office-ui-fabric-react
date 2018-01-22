@@ -58,8 +58,14 @@ export interface IToggleProps extends React.HTMLAttributes<HTMLElement | Toggle>
 
   /**
    * onchange callback.
+   * @deprecated
    */
   onChanged?: (checked: boolean) => void;
+
+  /**
+   * onchange callback.
+   */
+  onChange?: (ev?: React.FormEvent<HTMLElement | Toggle>, checked?: boolean) => void;
 
   /**
    * Theme provided by HOC.

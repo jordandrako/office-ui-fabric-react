@@ -124,7 +124,7 @@ export class Toggle extends BaseComponent<IToggleProps, IToggleState> implements
 
   @autobind
   private _onClick(ev: React.MouseEvent<HTMLElement>) {
-    let { disabled, checked, onChanged, onClick } = this.props;
+    let { disabled, checked, onChanged, onChange, onClick } = this.props;
     let { isChecked } = this.state;
 
     if (!disabled) {
@@ -135,7 +135,12 @@ export class Toggle extends BaseComponent<IToggleProps, IToggleState> implements
         });
       }
 
-      if (onChanged) {
+      /**
+       * Prop onChanged is @deprecated, please use onChange.
+       */
+      if (onChange) {
+        onChange(ev, !isChecked);
+      } else if (onChanged) {
         onChanged(!isChecked);
       }
 
