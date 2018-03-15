@@ -10,6 +10,7 @@ export * from './FabricPerformance';
 export * from './GlobalSettings';
 export * from './IClassNames';
 export * from './IDisposable';
+export * from './IGetStylesFunction';
 export * from './IPoint';
 export * from './IRectangle';
 export * from './IRenderFunction';
