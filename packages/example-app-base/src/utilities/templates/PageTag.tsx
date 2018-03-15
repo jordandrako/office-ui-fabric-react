@@ -1,17 +1,14 @@
 import {
   BaseComponent,
   IBaseProps,
-  customizable
+  classNamesFunction,
+  customizable,
 } from 'office-ui-fabric-react/lib/Utilities';
 import {
   ITheme,
   IStyle,
-  mergeStyleSets
 } from 'office-ui-fabric-react/lib/Styling';
 import * as React from 'react';
-import {
-  IClassNames
-} from '../utilities';
 import { TypeScriptSnippet } from './TypeScriptSnippet';
 
 export interface IPageTagProps extends React.Props<PageTag>, IBaseProps {
@@ -39,13 +36,16 @@ const getDefaultStyles = (props: IPageTagStyleProps): IPageTagStyles => ({
   }
 });
 
+const getClassNames = classNamesFunction<IPageTagStyleProps, IPageTagStyles>();
+
 @customizable('PageTag', ['theme'])
 export class PageTag extends BaseComponent<IPageTagProps, {}> {
   public render(): JSX.Element {
     const { children, theme, className } = this.props;
     const styleProps: IPageTagStyleProps = { theme: theme! };
-    const classNames: IClassNames<IPageTagStyles> = mergeStyleSets(
-      getDefaultStyles(styleProps)
+    const classNames = getClassNames(
+      getDefaultStyles!,
+      styleProps
     );
 
     if (className !== undefined) {

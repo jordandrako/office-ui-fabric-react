@@ -40,6 +40,7 @@ export class TypeScriptSnippet extends React.Component {
         lineNumberStyle={ lineNumberStyle }
         language='typescript'
         className={ rootClass }
+        // tslint:disable-next-line:jsx-ban-props
         style={ style }
       >
         { this.props.children }

@@ -2,18 +2,15 @@ import {
   BaseComponent,
   IBaseProps,
   autobind,
-  customizable
+  customizable,
+  classNamesFunction,
 } from 'office-ui-fabric-react/lib/Utilities';
 import {
   ITheme,
   IStyle,
-  mergeStyleSets,
   getFocusStyle
 } from 'office-ui-fabric-react/lib/Styling';
 import * as React from 'react';
-import {
-  IClassNames
-} from '../utilities';
 import { TypeScriptSnippet } from './TypeScriptSnippet';
 import { PageHeader } from './PageHeader';
 
@@ -79,6 +76,8 @@ const getSubHeaderStyles = () => ({
   root: { flexGrow: 1 }
 });
 
+const getClassNames = classNamesFunction<IPageExampleCardStyleProps, IPageExampleCardStyles>();
+
 @customizable('PageExampleCard', ['theme'])
 export class PageExampleCard extends BaseComponent<IPageExampleCardProps, IPageExampleCardState> {
   constructor(props: IPageExampleCardProps) {
@@ -93,8 +92,9 @@ export class PageExampleCard extends BaseComponent<IPageExampleCardProps, IPageE
     const { children, theme, code, title } = this.props;
     const { expanded } = this.state;
     const styleProps: IPageExampleCardStyleProps = { theme: theme! };
-    const classNames: IClassNames<IPageExampleCardStyles> = mergeStyleSets(
-      getDefaultStyles(styleProps)
+    const classNames = getClassNames(
+      getDefaultStyles!,
+      styleProps
     );
 
     return (

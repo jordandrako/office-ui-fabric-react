@@ -2,16 +2,13 @@ import * as React from 'react';
 import {
   BaseComponent,
   IBaseProps,
+  classNamesFunction,
   customizable
 } from 'office-ui-fabric-react/lib/Utilities';
 import {
   ITheme,
   IStyle,
-  mergeStyleSets
 } from 'office-ui-fabric-react/lib/Styling';
-import {
-  IClassNames
-} from '../utilities';
 
 export interface IPageParagraphProps extends React.Props<PageParagraph>, IBaseProps {
   theme?: ITheme;
@@ -25,6 +22,8 @@ export interface IPageParagraphStyleProps {
   theme: ITheme;
   isTodo: boolean;
 }
+
+const getClassNames = classNamesFunction<IPageParagraphStyleProps, IPageParagraphStyles>();
 
 const getDefaultStyles = (props: IPageParagraphStyleProps): IPageParagraphStyles => ({
   root: [
@@ -47,8 +46,10 @@ export class PageParagraph extends BaseComponent<IPageParagraphProps, {}> {
       theme: theme!,
       isTodo: typeof children === 'string' && children.indexOf('TODO') === 0
     };
-    const classNames: IClassNames<IPageParagraphStyles> = mergeStyleSets(
-      getDefaultStyles(styleProps)
+
+    const classNames = getClassNames(
+      getDefaultStyles!,
+      styleProps
     );
 
     return (

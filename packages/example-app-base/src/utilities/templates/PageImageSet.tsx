@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   BaseComponent,
   IBaseProps,
+  IClassNames,
   customizable
 } from 'office-ui-fabric-react/lib/Utilities';
 import {
@@ -12,9 +13,6 @@ import {
 import {
   IImageProps
 } from 'office-ui-fabric-react/lib/Image';
-import {
-  IClassNames
-} from '../utilities';
 
 export interface IPageImageSetStyles {
   root: IStyle;

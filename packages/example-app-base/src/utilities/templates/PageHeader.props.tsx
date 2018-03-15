@@ -7,7 +7,7 @@ import {
 } from 'office-ui-fabric-react/lib/Styling';
 import {
   IGetStylesFunction
-} from '../utilities';
+} from '../../../../utilities';
 
 /**
  * The getStyles props contract.

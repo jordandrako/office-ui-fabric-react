@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {
   BaseComponent,
-  customizable
+  customizable,
+  IClassNames
 } from 'office-ui-fabric-react/lib/Utilities';
 import {
   IPageHeaderProps,
@@ -11,9 +12,6 @@ import {
 import {
   mergeStyleSets
 } from 'office-ui-fabric-react/lib/Styling';
-import {
-  IClassNames
-} from '../utilities';
 
 @customizable('PageHeader', ['theme'])
 export class PageHeaderBase extends BaseComponent<IPageHeaderProps, {}> {

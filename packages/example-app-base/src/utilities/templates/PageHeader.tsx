@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStyled } from '../utilities';
+// import { createStyled } from '../utilities';
 import {
   BaseComponent,
   IBaseProps,
@@ -11,8 +11,9 @@ import {
   IStyle
 } from 'office-ui-fabric-react/lib/Styling';
 import {
-  IGetStylesFunction
-} from '../utilities';
+  IGetStylesFunction,
+  styled
+} from '../../../../utilities';
 
 /**
  * The getStyles props contract.
@@ -62,7 +63,7 @@ export class PageHeaderBase extends BaseComponent<IPageHeaderProps, {}> {
 /**
  * A variant of PageHeaderBase with styling.
  */
-export const PageHeader = createStyled(
+export const PageHeader = styled(
   PageHeaderBase as React.ComponentClass<IPageHeaderProps>,
   (props: IPageHeaderStyleProps): Partial<IPageHeaderStyles> => ({
     root: [
