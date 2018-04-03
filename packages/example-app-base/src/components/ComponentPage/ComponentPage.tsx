@@ -6,7 +6,9 @@ import {
 import {
   Link
 } from 'office-ui-fabric-react/lib/Link';
+import { IconButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
+import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 import './ComponentPage.scss';
 
 export interface IComponentPageSection {
@@ -32,6 +34,39 @@ export interface IComponentPageProps {
   otherSections?: IComponentPageSection[];
   allowNativeProps?: boolean | string;
   nativePropsElement?: string | string[] | undefined;
+
+  /**
+   * Link to the Component on GitHub.
+   * Enables 'View On GitHub' and all 'Edit' buttons.
+   */
+  componentUrl?: string;
+
+  /**
+   * Link to the Donts markdown file on GitHub.
+   * Enables the 'Edit Don'ts' button.
+   * Overrides URL from componentUrl.
+   */
+  editDontsUrl?: string;
+
+  /**
+   * Link to the Dos markdown file on GitHub.
+   * Enables the 'Edit Dos' button.
+   * Overrides URL from componentUrl.
+   */
+  editDosUrl?: string;
+
+  /**
+   * Link to the Overview markdown file on GitHub.
+   * Enables the 'Edit Overview' button.
+   * Overrides URL from componentUrl.
+   */
+  editOverviewUrl?: string;
+}
+
+export enum ComponentPageSection {
+  Dos = 0,
+  Donts = 1,
+  Overview = 2,
 }
 
 export class ComponentPage extends React.Component<IComponentPageProps, {}> {
@@ -63,7 +98,10 @@ export class ComponentPage extends React.Component<IComponentPageProps, {}> {
           <div className='ComponentPage-body'>
             { this._getComponentStatusBadges() }
             <div className='ComponentPage-overviewSection'>
-              <h2 className='ComponentPage-subHeading' id='Overview'>Overview</h2>
+              <div className='ComponentPage-overviewSectionHeader'>
+                <h2 className='ComponentPage-subHeading' id='Overview'>Overview</h2>
+                { this._editButton(ComponentPageSection.Overview, this.props.editOverviewUrl) }
+              </div>
               <div className='ComponentPage-overviewSectionContent'>
                 <div className='ComponentPage-overview'>
                   { overview }
@@ -100,7 +138,7 @@ export class ComponentPage extends React.Component<IComponentPageProps, {}> {
     let {
       bestPractices,
       dos,
-      donts
+      donts,
     } = this.props;
 
     if (bestPractices && dos && donts) {
@@ -126,6 +164,9 @@ export class ComponentPage extends React.Component<IComponentPageProps, {}> {
         { this.props.propertiesTables && <div className='ComponentPage-navLink'>
           <Link { ...{ href: this._baseUrl + '#Implementation' } }>Implementation</Link>
         </div> }
+        { this.props.componentUrl && <div className='ComponentPage-navLink'>
+          <Link href={ this.props.componentUrl } target='_blank' rel='noopener noreferrer'>View On Github</Link>
+        </div> }
         { this.props.otherSections && this.props.otherSections.map((componentPageSection: IComponentPageSection, index: number) => {
           return <div key={ index + 'class' } className='ComponentPage-navLink'>
             <Link
@@ -138,6 +179,48 @@ export class ComponentPage extends React.Component<IComponentPageProps, {}> {
         }) }
       </div >
     );
+  }
+
+  private _editButton(sectionIndex: ComponentPageSection, url?: string): JSX.Element | undefined {
+    // Get section string for URLs and IDs.
+    const section = ComponentPageSection[sectionIndex];
+
+    // Generate edit URL from componentURL
+    let mdUrl: string | undefined = undefined;
+    if (this.props.componentUrl) {
+      mdUrl = `${this.props.componentUrl}/docs/${this.props.componentName}${section}.md`;
+    }
+
+    // Allow generated URL fallback.
+    const editUrl: string | undefined = url || mdUrl || undefined;
+
+    if (editUrl) {
+      // Get make section readable for tooltip. Add apostrophe to Don't
+      let readableSection = section;
+      if (sectionIndex === ComponentPageSection.Donts) {
+        readableSection = 'Don\'ts';
+      }
+      return (
+        <TooltipHost
+          content={ `Edit ${this.props.componentName} ${readableSection} on GitHub` }
+          id={ `${this.props.componentName}-${section}-editButtonHost` }
+        >
+          <IconButton
+            key={ `${this.props.componentName}-${section}-editButton` }
+            aria-describedby={ `${this.props.componentName}-${section}-editButtonHost` }
+            className={ `ComponentPage-editButton ComponentPage-editButton--${section}` }
+            iconProps={ {
+              iconName: 'Edit'
+            } }
+            href={ editUrl }
+            target='_blank'
+            rel='noopener noreferrer'
+          />
+        </TooltipHost>
+      );
+    }
+
+    return undefined;
   }
 
   private _getRelatedComponents(): JSX.Element | undefined {
@@ -210,11 +293,19 @@ export class ComponentPage extends React.Component<IComponentPageProps, {}> {
       dosAndDonts.push(
         <div className='ComponentPage-doSections' key='do-sections'>
           <div className='ComponentPage-doSection'>
-            <h3>Do</h3>
+            <div className='ComponentPage-doSectionHeader'>
+              <h3>Do</h3>
+              { this._editButton(ComponentPageSection.Dos, this.props.editDosUrl) }
+            </div>
+            <hr className='ComponentPage-doSectionHr' />
             { this.props.dos }
           </div>
           <div className='ComponentPage-doSection ComponentPage-doSection--dont'>
-            <h3>Don&rsquo;t</h3>
+            <div className='ComponentPage-doSectionHeader'>
+              <h3>Don&rsquo;t</h3>
+              { this._editButton(ComponentPageSection.Donts, this.props.editDontsUrl) }
+            </div>
+            <hr className='ComponentPage-doSectionHr' />
             { this.props.donts }
           </div>
         </div>
