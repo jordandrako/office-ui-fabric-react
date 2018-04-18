@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "comment": "Prepare ProgressIndicator for conversion to mergeStyles.",
+      "packageName": "office-ui-fabric-react",
+      "type": "minor"
+    }
+  ],
+  "packageName": "office-ui-fabric-react",
+  "email": "v-jojanz@microsoft.com"
+}
