@@ -3,8 +3,9 @@ import {
   ExampleCard,
   ComponentPage,
   IComponentDemoPageProps,
+  LiveCode,
   PageMarkdown,
-  PropertiesTableSet
+  PropertiesTableSet,
 } from '@uifabric/example-app-base';
 import { PersonaInitialsExample } from './examples/Persona.Initials.Example';
 import { PersonaBasicExample } from './examples/Persona.Basic.Example';
@@ -55,9 +56,12 @@ export class PersonaPage extends React.Component<IComponentDemoPageProps, {}> {
           />
         }
         overview={
-          <PageMarkdown>
-            { require<string>('!raw-loader!office-ui-fabric-react/src/components/Persona/docs/PersonaOverview.md') }
-          </PageMarkdown>
+          <>
+            <PageMarkdown>
+              { require<string>('!raw-loader!office-ui-fabric-react/src/components/Persona/docs/PersonaOverview.md') }
+            </PageMarkdown>
+            <LiveCode code={ PersonaBasicExampleCode } />
+          </>
         }
         bestPractices={
           <div />

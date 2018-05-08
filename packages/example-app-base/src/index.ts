@@ -5,6 +5,7 @@ export * from './components/EditSection';
 export * from './components/ExampleCard/ExampleCard';
 export * from './components/Header/Header';
 export * from './components/Highlight/Highlight';
+export * from './components/LiveCode/LiveCode';
 export * from './components/PropertiesTable/PropertiesTable';
 export * from './components/PropertiesTable/PropertiesTableSet';
 export * from './components/PropertiesTable/PropertiesTableSet.types';
