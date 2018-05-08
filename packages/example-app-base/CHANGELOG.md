@@ -1,6 +1,20 @@
 # Change Log - @uifabric/example-app-base
 
-This log was last generated on Wed, 02 May 2018 23:55:40 GMT and should not be manually modified.
+This log was last generated on Tue, 08 May 2018 10:17:01 GMT and should not be manually modified.
+
+## 5.11.3
+Tue, 08 May 2018 10:17:01 GMT
+
+### Patches
+
+- Pin markdown-to-jsx dependency
+
+## 5.11.2
+Fri, 04 May 2018 15:58:38 GMT
+
+### Patches
+
+- Updating React build version.
 
 ## 5.11.1
 Wed, 02 May 2018 23:55:40 GMT
