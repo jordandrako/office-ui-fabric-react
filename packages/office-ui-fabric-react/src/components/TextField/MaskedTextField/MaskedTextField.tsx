@@ -239,12 +239,28 @@ export class MaskedTextField extends BaseComponent<ITextFieldProps, IMaskedTextF
   }
 
   private _onMouseDown = (event: React.MouseEvent<HTMLInputElement>): void => {
+    const {
+      onMouseDown
+    } = this.props;
+
+    if (onMouseDown) {
+      onMouseDown(event);
+    }
+
     if (!this._isFocused) {
       this._moveCursorOnMouseUp = true;
     }
   }
 
   private _onMouseUp = (event: React.MouseEvent<HTMLInputElement>): void => {
+    const {
+      onMouseUp
+    } = this.props;
+
+    if (onMouseUp) {
+      onMouseUp(event);
+    }
+
     // Move the cursor on mouseUp after focusing the textField
     if (this._moveCursorOnMouseUp) {
       this._moveCursorOnMouseUp = false;
@@ -261,6 +277,14 @@ export class MaskedTextField extends BaseComponent<ITextFieldProps, IMaskedTextF
   }
 
   private _onBeforeChange = (value: String): void => {
+    const {
+      onBeforeChange
+    } = this.props;
+
+    if (onBeforeChange) {
+      onBeforeChange(value);
+    }
+
     if (this._changeSelectionData === null) {
       this._changeSelectionData = {
         changeType: inputChangeType.default,
@@ -349,6 +373,14 @@ export class MaskedTextField extends BaseComponent<ITextFieldProps, IMaskedTextF
   }
 
   private _onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+    const {
+      onKeyDown
+    } = this.props;
+
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
+
     this._changeSelectionData = null;
     if (this._textField.value) {
       const {
@@ -364,8 +396,8 @@ export class MaskedTextField extends BaseComponent<ITextFieldProps, IMaskedTextF
 
       // On backspace or delete, store the selection and the keyCode
       if (keyCode === KeyCodes.backspace || keyCode === KeyCodes.del) {
-        const selectionStart = (event.target as HTMLInputElement).selectionStart,
-          selectionEnd = (event.target as HTMLInputElement).selectionEnd;
+        const selectionStart = (event.target as HTMLInputElement).selectionStart;
+        const selectionEnd = (event.target as HTMLInputElement).selectionEnd;
 
         // Check if backspace or delete press is valid.
         if (!(keyCode === KeyCodes.backspace && selectionEnd && selectionEnd > 0)
@@ -385,6 +417,14 @@ export class MaskedTextField extends BaseComponent<ITextFieldProps, IMaskedTextF
   }
 
   private _onPaste = (event: React.ClipboardEvent<HTMLInputElement>): void => {
+    const {
+      onPaste
+    } = this.props;
+
+    if (onPaste) {
+      onPaste(event);
+    }
+
     const selectionStart = (event.target as HTMLInputElement).selectionStart,
       selectionEnd = (event.target as HTMLInputElement).selectionEnd;
     // Store the paste selection range
