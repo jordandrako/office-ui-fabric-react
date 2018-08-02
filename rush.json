@@ -26,7 +26,8 @@
     {
       "packageName": "@uifabric/foundation",
       "projectFolder": "packages/foundation",
-      "shouldPublish": false
+      "versionPolicyName": "lockedMajor",
+      "shouldPublish": true
     },
     {
       "packageName": "@uifabric/charting",
@@ -35,8 +36,8 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@uifabric/dashboard-grid-layout",
-      "projectFolder": "packages/dashboard-grid-layout",
+      "packageName": "@uifabric/dashboard",
+      "projectFolder": "packages/dashboard",
       "versionPolicyName": "lockedMajor",
       "shouldPublish": true
     },
