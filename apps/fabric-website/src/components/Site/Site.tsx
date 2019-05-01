@@ -15,6 +15,7 @@ import {
   ScrollBars,
   INavPage,
   PlatformPicker,
+  PlatformBar,
   TPlatformPages
 } from '@uifabric/example-app-base/lib/index2';
 import { Nav } from '../Nav/index';
@@ -135,6 +136,7 @@ export class Site<TPlatforms extends string = string> extends React.Component<IS
           ) : (
             <SiteContent />
           )}
+          {this._renderPlatformBar()}
         </AppCustomizationsContext.Provider>
       </PlatformContext.Provider>
     );
@@ -247,6 +249,23 @@ export class Site<TPlatforms extends string = string> extends React.Component<IS
       );
     }
     return null;
+  };
+
+  private _renderPlatformBar = (): JSX.Element | undefined => {
+    const { siteDefinition } = this.props;
+    const { platform, pagePlatforms, hasPlatformPicker } = this.state;
+
+    return (
+      hasPlatformPicker &&
+      Object.keys(pagePlatforms).length > 0 && (
+        <PlatformBar
+          activePlatform={platform}
+          onPlatformClick={this._onPlatformChanged}
+          pagePlatforms={pagePlatforms}
+          platforms={siteDefinition.platforms}
+        />
+      )
+    );
   };
 
   /**
